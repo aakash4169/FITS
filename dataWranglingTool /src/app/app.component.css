@@ -1,0 +1,20 @@
+.upperLabelLeftOption{
+    background-color: blue;
+    border-right: 1px black solid;
+    border-left: 1px black solid;
+    border-top: 1px black solid;
+    color: #fff;
+    border-radius: 15px 15px 0px 0px;
+}
+
+.top-buffer { margin-top:50px; }
+
+.top-buffer-chart { margin-top:80px; }
+
+.bottom-buffer { margin-bottom:50px; }
+
+.shadow {
+    -moz-box-shadow:    3px 3px 5px 6px #ccc;
+    -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+    box-shadow:         3px 3px 5px 6px #ccc;
+  }

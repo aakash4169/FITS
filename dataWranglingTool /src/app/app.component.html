@@ -1,0 +1,205 @@
+<!-- -------------- Check Bootstrap is running -------------- -->
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent" [collapse]="!isCollapsed">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav> -->
+
+<!-- -------------- Header -------------- -->
+<div class="container mt-2">
+  <div class="row top-buffer">
+    <div class="col-12 text-center">
+      <h1>
+        Data Wrangling Tool
+      </h1>
+    </div>
+  </div>
+</div>
+
+
+<!-- -------------- 1st Column -------------- -->
+<div class="container my-5">
+  <div class="row">
+
+    <!-- -------------- Left Row -------------- -->
+    <div class="col-3 shadow">
+      <div class="red-border py-4 px-4">
+        
+        <h6>Choose or Upload Dataset</h6>
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="validatedCustomFile" required>
+          <label class="custom-file-label" for="validatedCustomFile">Upload Dataset</label>
+        </div>
+        <br>
+        <br>
+        <div class="chooseData">
+          <select class="form-control">
+            <option>tread_depth</option>
+            <option>dataset1</option>
+            <option>dataset2</option>
+            <option>dataset3</option>
+            <option>dataset4</option>
+            <option>dataset5</option>
+            <option>dataset6</option>
+            <option>dataset7</option>
+            <option>dataset8</option>
+            <option>dataset9</option>
+          </select>
+        </div>
+        <br>
+
+        <h6>Data Type</h6>
+        <form>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="dataType" id="cleandata" value="option1" checked>
+            <label class="form-check-label" for="cleandata">
+              Clean Data
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="dataType" id="rawdata" value="option2">
+            <label class="form-check-label" for="rawdata">
+              Raw Data
+            </label>
+          </div>
+        </form>
+        <br>
+        <div class="impute">
+          <h6>Imputation</h6>
+          <select class="form-control" (change)="onChangeSelectDataOptions($event.target.value)">
+            <option value=1>Remove Null</option>
+            <option value=2>Replace Null with Mean</option>
+            <option value=3>Replace Null with Mode</option>
+          </select>
+        </div>
+        <br>
+
+        <h6>Visualize</h6>
+        <form>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="histogram" value="option1"
+              (change)="handleChange($event)" checked>
+            <label class="form-check-label" for="histogram">
+              Histogram
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="piechart" value="option2"
+              (change)="handleChange($event)">
+            <label class="form-check-label" for="piechart">
+              Pie Chart
+            </label>
+          </div>
+        </form>
+        <br>
+        <div class="features">
+          <h6>Features</h6>
+          <select class="form-control" (change)="onChangeSelectOptions($event.target.value)">
+            <option>td_min</option>
+            <option>td_mean</option>
+            <option>tacho</option>
+            <option>mileage</option>
+            <option>tisize_rim</option>
+            <option>tisize_width</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- -------------- Right Row -------------- -->
+    <div class="col-9 p-4 text-center top-buffer-chart">
+
+      <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single" [gradient]="gradient"
+        [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"
+        (select)="onSelect($event)" *ngIf="showHistogram">
+      </ngx-charts-bar-vertical>
+
+      <ngx-charts-pie-chart [view]="view" [scheme]="colorScheme" [results]="single" [legend]="showLegend"
+        [explodeSlices]="explodeSlices" [labels]="showLabels" [doughnut]="doughnut" [gradient]="gradient"
+        (select)="onSelect($event)" *ngIf="showPiechart">
+      </ngx-charts-pie-chart>
+
+
+    </div>
+
+  </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row top-buffer bottom-buffer">
+      <div class="col-12 text-center">
+        <a href="#tab">
+          <button class="btn btn-outline-secondary">Statistics</button>
+        </a>
+        <br><br>
+        <table id="tab" class="table table-bordered">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">mileage</th>
+                <th scope="col">tacho</th>
+                <th scope="col">td_min</th>
+                <th scope="col">td_mean</th>
+                <th scope="col">tisize_rim</th>
+                <th scope="col">tisize_width</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Count</th>
+                <td>6.641920e+05</td>
+                <td>5.547240e+05</td>
+                <td>666556.000000</td>
+                <td>666210.000000</td>
+                <td>666285.000000</td>
+                <td>666833.000000</td>
+              </tr>
+              <tr>
+                <th scope="row">Mean</th>
+                <td>5.801917e+04</td>
+                <td>3.043679e+05</td>
+                <td>9.750815</td>
+                <td>10.713031</td>
+                <td>20.250947</td>
+                <td>2285.188112</td>
+              </tr>
+              <tr>
+                  <th scope="row">SD</th>
+                  <td>7.293494e+04</td>
+                  <td>3.032992e+05</td>
+                  <td>7.599536</td>
+                  <td>7.352813</td>
+                  <td>12.156476</td>
+                  <td>76.952616</td>
+              </tr>
+              <tr>
+                  <th scope="row">Min</th>
+                  <td>-2.309810e+05</td>
+                  <td>0.000000e+00</td>
+                  <td>0.000000</td>
+                  <td>-0.100000</td>
+                  <td>2.0000000</td>
+                  <td>100.000000</td>
+              </tr>
+              <tr>
+                  <th scope="row">Max</th>
+                  <td>1.323980e+06</td>
+                  <td>1.046440e+07</td>
+                  <td>114.000000</td>
+                  <td>114.000000</td>
+                  <td>470.000000</td>
+                  <td>1078.000000</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+  </div>
